@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node main.js",
     "dev": "nodemon main.js --config config/nodemon.json",
-    "build": "webpack -d --config config/webpack.config.js",
+    "build": "webpack --config config/webpack.config.js",
     "auth-google" : "node calendar/authenticate_google.js"
   },
   "author": "Conner McCall <conner@connermccall.com>",
