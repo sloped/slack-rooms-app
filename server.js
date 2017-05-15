@@ -1,11 +1,7 @@
 import app from './config/app.js';
 import graphqlHTTP from 'express-graphql';
 import Schema from './graphql/rootquery.js';
-import env from 'node-env-file';
-
 import slack_handler from './slack/handler.js';
-
-env('.env');
 
 
 
@@ -24,9 +20,6 @@ app.get('/', function (req, res) {
 
 app.post('/slack', slack_handler);
 
-app.listen(3000, () => {
-  console.log({ running: true });
+app.listen(process.env.PORT, () => {
+  console.info(`Server running on port ${process.env.PORT}`);
 });
-
-
-console.log({ starting: true });

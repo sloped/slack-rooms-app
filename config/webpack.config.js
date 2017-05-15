@@ -1,8 +1,13 @@
 /* global module */
+const path = require('path');
+const webpack = require('webpack');
+
 module.exports = {
- entry: './resources/js/app.js',
+  entry: {
+    app: './resources/js/app.js'
+  },
   output: {
-    path: '/public/js',
+    path: path.resolve(__dirname, '../public/js'),
     filename: 'app.js',
     publicPath: "/js/",
   },

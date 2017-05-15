@@ -5,7 +5,9 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon main.js --config config/nodemon.json"
+    "start": "nodemon main.js --config config/nodemon.json",
+    "build": "webpack -d --config config/webpack.config.js",
+    "auth-google" : "node calendar/authenticate_google.js"
   },
   "author": "Conner McCall <conner@connermccall.com>",
   "license": "MIT",

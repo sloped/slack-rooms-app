@@ -3,24 +3,20 @@ var fs = require('fs');
 var readline = require('readline');
 var google = require('googleapis');
 var googleAuth = require('google-auth-library');
-
+var env = require('node-env-file');
+var db = require('../database/main.js')
+env('.env');
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/calendar-nodejs-quickstart.json
 var SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
-var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
-    process.env.USERPROFILE) + '/storage/';
+var TOKEN_DIR = 'storage/';
 var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json';
 
 // Load client secrets from a local file.
-fs.readFile('storage/client_secrets.json', function processClientSecrets(err, content) {
-  if (err) {
-    console.log('Error loading client secret file: ' + err);
-    return;
-  }
   // Authorize a client with the loaded credentials, then call the
   // Google Calendar API.
-  authorize(JSON.parse(content), listEvents);
-});
+  authorize(listEvents);
+
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -29,10 +25,11 @@ fs.readFile('storage/client_secrets.json', function processClientSecrets(err, co
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-function authorize(credentials, callback) {
-  var clientSecret = credentials.installed.client_secret;
-  var clientId = credentials.installed.client_id;
-  var redirectUrl = credentials.installed.redirect_uris[0];
+function authorize(callback) {
+
+  var clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+  var clientId = process.env.GOOGLE_CLIENT_ID;
+  var redirectUrl = process.env.GOOGLE_REDIRECT_URL;
   var auth = new googleAuth();
   var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
 
