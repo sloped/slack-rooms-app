@@ -25,7 +25,11 @@ function authorize(credentials) {
   var redirectUrl = process.env.GOOGLE_REDIRECT_URL;
   var auth = new googleAuth();
   var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
-  oauth2Client.credentials = JSON.parse(fs.readFileSync(TOKEN_PATH));
+  oauth2Client.credentials = {
+    "access_token":process.env.GOOGLE_OAUTH_ACCESS_TOKEN,
+    "refresh_token":process.env.GOOGLE_OAUTH_REFRESH_TOKEN,
+    "token_type":"Bearer",
+    "expiry_date":process.env.GOOGLE_OAUTH_EXPIRY};
   client = oauth2Client;
 }
 
