@@ -1,11 +1,15 @@
 import express from 'express';
+import fs from 'fs';
 import swig  from'swig';
 import webpack_config from './webpack.config.js';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpack from 'webpack';
 import bodyParser from 'body-parser';
 import env from 'node-env-file';
-env('.env');
+if (fs.existsSync('.env')) {
+    env('.env');
+}
+
 const app = express();
 
 app.engine('swig', swig.renderFile);
