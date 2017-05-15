@@ -8,7 +8,8 @@
     "start": "node main.js",
     "dev": "nodemon main.js --config config/nodemon.json",
     "build": "webpack --config config/webpack.config.js",
-    "auth-google" : "node calendar/authenticate_google.js"
+    "auth-google" : "node calendar/authenticate_google.js",
+    "heroku-postbuild": "webpack --config config/webpack.config.js"
   },
   "author": "Conner McCall <conner@connermccall.com>",
   "license": "MIT",
