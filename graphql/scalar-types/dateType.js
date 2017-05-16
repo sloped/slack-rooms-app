@@ -16,8 +16,8 @@ var DateType = new GraphQLScalarType({
 });
 
 function dateValue(value) {
-
-    var date =  moment(value, 'YYYY-MM-DDTHH:mm:ssZZ').toISOString();
+    
+    var date =  moment(value, 'YYYY-MM-DDTHH:mm:ssZZ').valueOf();
     return date;
 }
 

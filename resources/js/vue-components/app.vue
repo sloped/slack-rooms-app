@@ -21,15 +21,32 @@ import apolloProvider from '../apollo/apolloProvider.js';
 import router from '../routes/index.js';
 import moment from 'moment';
 import {rooms} from '../graphql/graphql.js';
-
+import later from 'later';
+import {every_minute} from '../resources/schedules';
     export default {
         apolloProvider,
         router,
         data() {
             return {
                 rooms : [],
-                now: moment().format("dddd, MMMM Do YYYY, h:mm:ss a")
+                currentMoment: moment()
             };
+        },
+        computed : {
+            now() {
+                return this.currentMoment.format("dddd, MMMM Do YYYY, h:mm a");
+            }
+        },
+        methods: {
+            updateNow() {
+                this.currentMoment = moment(); 
+            }
+        },
+        created() {
+            interval = later.setInterval(this.updateNow, every_minute )
+        },
+        destroyed() {
+            interval.clear();
         },
         apollo: {
             rooms

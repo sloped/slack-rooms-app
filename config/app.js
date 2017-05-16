@@ -25,7 +25,7 @@ else {
 }
 
 
-app.use(express.static('public'))
+
 
 app.use(bodyParser.json());
 
@@ -37,6 +37,9 @@ if( process.env.ENVIRONMENT !== 'production' ) {
   app.use(webpackMiddleware(webpack(webpack_config), {
     publicPath: webpack_config.output.publicPath
   }));
+}
+else {
+  app.use(express.static('public'))
 }
 
 

@@ -5,5 +5,6 @@ export default gql`query RoomEvents($roomName: String!) {
                     creator
                     startTime
                     endTime
+                    attendees
                 }
                 }`

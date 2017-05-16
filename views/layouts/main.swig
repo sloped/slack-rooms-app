@@ -5,7 +5,7 @@
   <title>{% block title %}Calendars{% endblock %}</title>
 
   {% block head %}
-  <link rel="stylesheet" href="/css/main.css">
+
   {% endblock %}
 </head>
 <body>

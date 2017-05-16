@@ -1,18 +1,13 @@
-var sqlite3 = require('sqlite3').verbose()
-var db = new sqlite3.Database('database/db.sqlite')
+import _knex from 'knex';
+import _bookshelf from 'bookshelf';
+import rooms from './models/rooms.js';
+import {development, production} from './knexfile.js';
+const knex = _knex(development);
 
-// db.serialize(function () {
-//     db.run('CREATE TABLE rooms ( name TEXT, gid TEXT)')
-//     var stmt = db.prepare('INSERT INTO rooms(name, gid) VALUES ($name, $gid)')
+const bookshelf = _bookshelf(knex);
+const Room = bookshelf.Model.extend( rooms );
+const Rooms = bookshelf.Collection.extend( {
+    model: Room
+});
 
-//     stmt.run({ $name: 'Feisty', $gid: 'clockwork.net_2d3831353837323433393633@resource.calendar.google.com'});
-//     stmt.run({ $name: 'Green', $gid: 'clockwork.net_2d3438323538303639383430@resource.calendar.google.com'});
-//     stmt.run({ $name: 'Gears', $gid: 'clockwork.net_2d3233333231373434343232@resource.calendar.google.com'});
-//     stmt.run({ $name: 'Large', $gid: 'clockwork.net_2d3933363839303839363836@resource.calendar.google.com'});
-//     stmt.run({ $name: 'Small', $gid: 'clockwork.net_37383832313939353132@resource.calendar.google.com'});
-//     stmt.run({ $name: 'Flex', $gid: 'clockwork.net_36343431333030322d363432@resource.calendar.google.com'});
-
-//     stmt.finalize()
-// });
-
-module.exports = db;
+module.exports = {bookshelf, Room, Rooms};

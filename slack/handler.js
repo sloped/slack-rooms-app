@@ -1,14 +1,18 @@
 import request from 'request';
 import slash_rooms from './slash-rooms.js';
 import room_command from './room-command.js';
+
 const slack_handler = function(req, res) {
+    console.info('Receive Hook');
     let body = req.body;
+
     if( req.body.payload ) {
         body = JSON.parse(req.body.payload);
     }
+
     let response_url = body.response_url;
     let response_token = body.token;
-    console.log(body);
+
     if( check_token(body) ) {
         check_action(body);
     } 
@@ -23,10 +27,10 @@ const slack_handler = function(req, res) {
     function check_action(body) {
         if( body.command === '/rooms') {
             res.send();
-            slash_rooms(body);
+            slash_rooms(body, respond);
         }
         else if( body.callback_id === 'room_check') {
-            room_command(body);
+            room_command(body, respond);
         }
         else {
             console.error('unknown command');

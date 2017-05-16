@@ -2,6 +2,10 @@
 const path = require('path');
 const webpack = require('webpack');
 
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+
 module.exports = {
   entry: {
     app: './resources/js/app.js'
@@ -10,6 +14,13 @@ module.exports = {
     path: path.resolve(__dirname, '../public/js'),
     filename: 'app.js',
     publicPath: "/js/",
+  },
+  resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+      '@': resolve('resources'),
+      'later' : resolve('node_modules/later/later.js')
+    }
   },
   devtool: "#inline-source-map",
   module: {
@@ -32,6 +43,10 @@ module.exports = {
       {
         test: /\.scss$/,
         loaders: ["style-loader", "css-loader", "sass-loader"]
+      },
+      {
+        test: /later/,
+        use: 'exports-loader?later,later'
       }
     ]
   },

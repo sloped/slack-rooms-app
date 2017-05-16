@@ -1,8 +1,7 @@
 import request from 'request';
 import {available_rooms, list_rooms} from '../calendar/room_checks.js';
 
-const slash_rooms = function(body) {
-    const response_url  = body.response_url;
+const slash_rooms = function(body, respond) {
     if( body.text === 'help' ) {
         respond({
             "text" : `
@@ -65,18 +64,6 @@ const slash_rooms = function(body) {
         respond({
             "text" : `You can get [help], check a room's status [check], or find an available room [available]`
         })
-    }
-    function respond(data, in_channel = false) {
-        if( in_channel) {
-            data = Object.assign(data, {"response_type": "in_channel"});
-        }
-        return request.post({
-                uri: response_url,
-                json: true,
-                body: data
-            }, (err, httpResponse, body) => {
-                //console.log(err, httpResponse, body);
-            });
     }
 }
 

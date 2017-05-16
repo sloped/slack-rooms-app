@@ -1,34 +1,38 @@
 import moment from 'moment';
 import getCalendar from './get_calendar.js';
-import db from '../database/main.js';
+import {Room, Rooms} from '../database/main.js';
 
 const list_rooms = function() {
     return new Promise( (resolve, reject ) =>  {
-        db.all('SELECT name FROM rooms', function (err, row) {
-            resolve( row );
-        })
+        Rooms.forge().fetch().then( (collection) => {
+          resolve(collection.models.map( ({attributes}) => {
+            return {
+              name: attributes.name
+            }
+          }));
+        });
     }); 
    
 }
 const available_rooms = function() {
     return new Promise( (resolve, reject ) =>  {
-        db.all('SELECT name, gid FROM rooms', function (err, row) {
+        Rooms.forge().fetch().then( (collection) => {
             var promises = [];
             var rooms = [];
-            row.forEach( (room) => {
-                let promise = getCalendar(room.gid, new Date(new Date().getTime() + 1 * 60 * 60 * 1000).toISOString())
+            collection.models.forEach( ({attributes}) => {
+                let promise = getCalendar(attributes.gid, new Date(new Date().getTime() + 1 * 60 * 60 * 1000).toISOString())
                 promise.then( (events) => {
                     events.forEach((ev) => {
                         if( moment().isBetween(moment(ev.start.dateTime,  'YYYY-MM-DDTHH:mm:ssZZ'), moment(ev.end.dateTime,  'YYYY-MM-DDTHH:mm:ssZZ')) ) {
                             rooms.splice( rooms.findIndex( ( r ) => {
-                                return r === room; 
+                                return r === attributes; 
                             }), 1 );
                         }
                     })
                     return true;
                 } )
                 promises.push(promise);
-                rooms.push(room.name);
+                rooms.push(attributes.name);
             })
             Promise.all(promises).then( ()=> {
                 resolve(rooms);
@@ -39,13 +43,12 @@ const available_rooms = function() {
 
 const room_status = function(room) {
     return new Promise( (resolve, reject) => {
-        db.get('SELECT name, gid as calendar FROM rooms WHERE name = "' + room + '"', function (err, row) {
-          getCalendar(row.calendar).then( (data) => {
-              resolve(data)
-          });
-        })
-        
-    })
+        new Room( {'name' : room}).fetch().then( ( model ) => {
+            getCalendar(model.get('gid')).then( (data) => {
+                resolve(data)
+            });
+        });
+    });
     
 }
 

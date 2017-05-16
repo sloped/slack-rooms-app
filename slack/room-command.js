@@ -3,8 +3,7 @@ import moment from 'moment';
 import {available_rooms, room_status, list_rooms} from '../calendar/room_checks.js';
 
 
-let room_command = function(body) {
-    let response_url = body.response_url;
+let room_command = function(body, respond) {
     let now = moment();
     room_status(body.actions[0].value).then( (data) => {
         if( data !== null ) {
@@ -17,7 +16,6 @@ let room_command = function(body) {
 Ends in ${moment(current.end.dateTime,  'YYYY-MM-DDTHH:mm:ssZZ').fromNow(true)} (${moment(next.end.dateTime,  'YYYY-MM-DDTHH:mm:ssZZ').format('MM/DD h:mm:a')})`;
             }
             if( typeof next === 'object' ) {
-                console.log(next);
                 next_response = 
                     `*Next Event:* ${next.summary} (${next.creator.email})
 Starts in ${moment(next.start.dateTime,  'YYYY-MM-DDTHH:mm:ssZZ').fromNow(true)}(${moment(next.start.dateTime,  'YYYY-MM-DDTHH:mm:ssZZ').format('MM/DD h:mm:a')})`;
@@ -30,19 +28,6 @@ ${next_response}`
 
         }
     });
-
-    function respond(data, in_channel = false) {
-        if( in_channel) {
-            data = Object.assign(data, {"response_type": "in_channel"});
-        }
-        return request.post({
-                uri: response_url,
-                json: true,
-                body: data
-            }, (err, httpResponse, body) => {
-                //console.log(err, httpResponse, body);
-            });
-    }
 
     function find_current_event(data) {
         return data.find( (event) => {
