@@ -3,15 +3,20 @@
   "version": "0.1.0",
   "description": "Show calendar events for a room",
   "main": "main.js",
+  "engines": {
+    "node": "6.1.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node main.js",
     "dev": "nodemon main.js --config config/nodemon.json",
     "build": "webpack --config config/webpack.config.js",
     "auth-google": "node calendar/authenticate_google.js",
-    "heroku-postbuild": "webpack --config config/webpack.config.js",
+    "heroku-postbuild": "webpack --config config/webpack.config.js && npm run migrate && npm run seed",
     "knex": "knex --knexfile database/knexfile.js --cwd database",
-    "knex-prod": "echo \"need to create this command\""
+    "knex-prod": "knex --knexfile database/knexfile.js --cwd database --env production migrate:latest",
+    "migrate": "npm run knex migrate:latest",
+    "seed": "npm run knex seed:run"
   },
   "author": "Conner McCall <conner@connermccall.com>",
   "license": "MIT",
@@ -39,6 +44,7 @@
     "node-env-file": "^0.1.8",
     "node-sass": "^4.5.2",
     "npm": "^4.5.0",
+    "pg": "^6.2.2",
     "sass-loader": "^6.0.5",
     "sqlite3": "^3.1.8",
     "style-loader": "^0.17.0",

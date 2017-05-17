@@ -23,6 +23,7 @@ import moment from 'moment';
 import {rooms} from '../graphql/graphql.js';
 import later from 'later';
 import {every_minute} from '../resources/schedules';
+var interval = null;
     export default {
         apolloProvider,
         router,

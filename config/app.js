@@ -15,7 +15,7 @@ const app = express();
 app.engine('swig', swig.renderFile);
 app.set('view engine', 'swig');
 app.set('views', './views')
-if( process.env.ENVIRONMENT === 'production') {
+if( process.env.NODE_ENV === 'production') {
   app.set('view cache', true);
   swig.setDefaults({ cache: 'memory' });
 }
@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-if( process.env.ENVIRONMENT !== 'production' ) {
+if( process.env.NODE_ENV !== 'production' ) {
   app.use(webpackMiddleware(webpack(webpack_config), {
     publicPath: webpack_config.output.publicPath
   }));
