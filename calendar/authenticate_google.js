@@ -4,7 +4,7 @@ var readline = require('readline');
 var google = require('googleapis');
 var googleAuth = require('google-auth-library');
 var env = require('node-env-file');
-var db = require('../database/main.js')
+var db = require('../database')
 env('.env');
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/calendar-nodejs-quickstart.json

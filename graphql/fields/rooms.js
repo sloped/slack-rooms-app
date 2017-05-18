@@ -1,5 +1,5 @@
 import {GraphQLList } from 'graphql';
-import {Rooms} from '../../database/main.js';
+import {Rooms} from '../../database';
 import Room from '../types/room.js';
 
 const rooms =  {

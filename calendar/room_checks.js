@@ -1,6 +1,6 @@
 import moment from 'moment';
 import getCalendar from './get_calendar.js';
-import {Room, Rooms} from '../database/main.js';
+import {Room, Rooms} from '../database';
 
 const list_rooms = function() {
     return new Promise( (resolve, reject ) =>  {

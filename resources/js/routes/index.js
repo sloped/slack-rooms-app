@@ -1,5 +1,6 @@
 import VueRouter from 'vue-router';
-import Events from '../vue-components/events.vue';
+import Events from '@components/events/events.vue';
+
 const routes = [
   { name: 'events', path: '/events/:name', component: Events, props:true },
 ];

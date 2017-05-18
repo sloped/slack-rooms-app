@@ -1,7 +1,7 @@
 import { GraphQLString, GraphQLList, GraphQLNonNull } from 'graphql';
 import Event from '../types/event.js';
 import getCalendar from '../../calendar/get_calendar.js';
-import {Room} from '../../database/main.js';
+import {Room} from '../../database';
 
 const events = {
       type: new GraphQLList(Event),

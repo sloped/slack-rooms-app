@@ -1,5 +1,5 @@
 import {GraphQLNonNull, GraphQLString } from 'graphql';
-import {Room} from '../../database/main.js';
+import {Room} from '../../database';
 import RoomType from '../types/room.js';
 const room = {   
     type: RoomType,

@@ -18,7 +18,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      '@': resolve('resources'),
+      '@': resolve('resources/js'),
+      '@components': resolve('resources/js/vue-components'),
       'later' : resolve('node_modules/later/later.js')
     }
   },

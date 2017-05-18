@@ -1,47 +1,16 @@
 import express from 'express';
-import fs from 'fs';
-import swig  from'swig';
-import webpack_config from './webpack.config.js';
-import webpackMiddleware from 'webpack-dev-middleware';
-import webpack from 'webpack';
 import bodyParser from 'body-parser';
-import env from 'node-env-file';
-if (fs.existsSync('.env')) {
-    env('.env');
-}
+import process_env from './process_env.js';
+import config_view_engine from './view_engine.js';
+import config_static_assets from './static_assets.js';
 
 const app = express();
+process_env();
+config_view_engine(app);
+config_static_assets(app);
 
-app.engine('swig', swig.renderFile);
-app.set('view engine', 'swig');
-app.set('views', './views')
-if( process.env.NODE_ENV === 'production') {
-  app.set('view cache', true);
-  swig.setDefaults({ cache: 'memory' });
-}
-else {
-  app.set('view cache', false);
-  swig.setDefaults({ cache: false });
-}
-
-
-
-
-app.use(bodyParser.json());
-
-app.use(bodyParser.urlencoded({
+app.use(bodyParser.json()).use(bodyParser.urlencoded({
   extended: true
 }));
-
-if( process.env.NODE_ENV !== 'production' ) {
-  app.use(webpackMiddleware(webpack(webpack_config), {
-    publicPath: webpack_config.output.publicPath
-  }));
-}
-else {
-  app.use(express.static('public'))
-}
-
-
 
 module.exports = app;
