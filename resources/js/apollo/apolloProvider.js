@@ -3,7 +3,7 @@ import VueApollo from 'vue-apollo';
 import Vue from 'vue';
 const apolloClient = new ApolloClient({
   networkInterface: createNetworkInterface({
-    uri: 'http://localhost:3000/graphql',
+    uri: '/graphql',
     transportBatching: true,
   }),
   connectToDevTools: true,
