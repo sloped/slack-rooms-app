@@ -13,6 +13,10 @@ const events = {
       },
       resolve(root, params, options, ast) {
         return new Promise( (resolve, reject) => {
+            if(!options.isAuthenticated() ) {
+                resolve([]);
+                return;
+            }
             new Room( {'name' : params.name}).fetch().then( ( model ) => {
                 options.user.getCalendar(model.get('gid')).then( (data) => {
                     if( data === null ) {

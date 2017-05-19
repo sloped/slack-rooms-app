@@ -8,4 +8,8 @@ module.exports = function(app) {
         function(req, res) {
             res.redirect(301,'/');
         });
+    app.get('/logout', function(req, res){
+      req.logout();
+      res.redirect('/login');
+    });
 }

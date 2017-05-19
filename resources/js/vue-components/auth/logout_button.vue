@@ -1,0 +1,18 @@
+<template>
+<span class="nav-item component logout-button-component" v-if="user">
+    Welcome {{user.name}}&nbsp;<a class="button is-small" href="/logout"> Logout</a>
+</span>
+</template>
+
+<script>
+import moment from 'moment';
+var interval;
+    export default {
+        props: ['user']
+    };
+
+</script>
+
+<style lang="scss" scoped>
+
+</style>

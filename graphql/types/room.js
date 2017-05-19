@@ -22,21 +22,26 @@ export default new GraphQLObjectType({
     },
     events: {
         type: new GraphQLList(Event),
-        resolve(room) {
-            return new Promise((resolve, reject) => {
-                getCalendar(room.calendar).then( (data) => {
-                    resolve(data.map((event) => {
-                        return {
-                            name: event.summary,
-                            description: event.description,
-                            startTime: event.start.dateTime,
-                            creator: event.creator,
-                            endTime: event.end.dateTime,
-                            attendees: event.attendees
-                        }
-                    }))
-                });
-            })
+        resolve(room, params, req) {
+            if( req.isAuthenticated() ) {
+              return new Promise((resolve, reject) => {
+                  req.user.getCalendar(room.calendar).then( (data) => {
+                      resolve(data.map((event) => {
+                          return {
+                              name: event.summary,
+                              description: event.description,
+                              startTime: event.start.dateTime,
+                              creator: event.creator,
+                              endTime: event.end.dateTime,
+                              attendees: event.attendees
+                          }
+                      }))
+                  });
+              });
+            }
+            else {
+              return null;
+            }
             
         }
     }

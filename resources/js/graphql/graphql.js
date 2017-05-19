@@ -1,3 +1,4 @@
 import rooms from './rooms.js';
 import events from './events.js';
-export {rooms, events};
+import user from './user.js';
+export {rooms, events, user};
