@@ -30,6 +30,7 @@ const slack_handler = function(req, res) {
             slash_rooms(body, respond);
         }
         else if( body.callback_id === 'room_check') {
+             res.send();
             room_command(body, respond);
         }
         else {
