@@ -15,8 +15,8 @@ module.exports = getCalendar;
  * @param {function} callback The callback to call with the authorized client.
  */
 function authorize(credentials) {
-  var clientSecret = process.env.GOOGLE_CLIENT_SECRET;
-  var clientId = process.env.GOOGLE_CLIENT_ID;
+  var clientSecret = process.env.SLACK_GOOGLE_CLIENT_SECRET;
+  var clientId = process.env.SLACK_GOOGLE_CLIENT_ID;
   var redirectUrl = process.env.GOOGLE_REDIRECT_URL;
   var auth = new googleAuth();
   var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
