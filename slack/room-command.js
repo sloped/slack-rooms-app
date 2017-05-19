@@ -8,7 +8,7 @@ let room_command = function(body, respond) {
 
     room_status(room).then( (data) => {
 
-        
+
         if( data !== null ) {
             respond(build_room_response(data, room));
         }

@@ -29,7 +29,7 @@ module.exports = {
   production: {
     client: 'postgresql',
     version: '9.6.2',
-    debug:true,
+    debug:false,
     connection: process.env.DATABASE_URL + '?ssl=true',
     migrations: {
       tableName: 'knex_migrations'
