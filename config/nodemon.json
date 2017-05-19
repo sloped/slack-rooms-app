@@ -1,3 +1,13 @@
 {
-    "ignore": ["public/**", "views/**", "resources/**", "package.json", "database/migrations/*", "database/seeds/*"]
+"ignore": [
+        "public/**", 
+        "views/**", 
+        "resources/**", 
+        "storage/**",
+        "package.json", 
+        "npm-shrinkwrap.json",
+        "README.md",
+        "database/migrations/*", 
+        "database/seeds/*", 
+        "console/*"]
 }

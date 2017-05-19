@@ -16,7 +16,8 @@
     "knex": "knex --knexfile database/knexfile.js --cwd database",
     "knex-prod": "knex --knexfile database/knexfile.js --cwd database --env production migrate:latest",
     "migrate": "npm run knex migrate:latest",
-    "seed": "npm run knex seed:run"
+    "seed": "npm run knex seed:run",
+    "generate:key" : "node console/generate_app_key"
   },
   "author": "Conner McCall <conner@connermccall.com>",
   "license": "MIT",
