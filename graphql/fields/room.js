@@ -12,11 +12,12 @@ const room = {
     resolve(root, params, options, ast) {
     return new Promise( (resolve, reject) => {
         new Room( {'name' : params.name}).fetch().then( ( model ) => {
-            resolve();
+            resolve( {
+                  name: model.get('name'),
+                  calendar: model.get('gid')
+                });
         })
-        // db.get('SELECT name, gid as calendar FROM rooms WHERE name = "' + params.name + '"', function (err, row) {
-        //   resolve( row );
-        // })
+        
     })
     }
 }

@@ -1,3 +1,3 @@
 {
-    "ignore": ["public/**", "views/**", "resources/**", "package.json"]
+    "ignore": ["public/**", "views/**", "resources/**", "package.json", "database/migrations/*", "database/seeds/*"]
 }

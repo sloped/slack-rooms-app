@@ -34,25 +34,42 @@ export default new GraphQLObjectType({
     attendees: {
         type: new GraphQLList(GraphQLString),
         resolve(event) {
-            return  event.attendees.map( (attendee) => {
-                if( attendee.email.search(/\@clockwork\.(com|net)/) > -1 ) {
-                    return attendee.displayName;
-                }
-                else {
-                    return false;
-                }
-            }).filter( (element) => { 
-                return element;  
-            });
-            
+
+            if( event.attendees ) {
+                return  event.attendees.map( (attendee) => {
+                    if( attendee.email.search(/\@clockwork\.(com|net)/) > -1 ) {
+                       if( attendee.displayName) {
+                        return attendee.displayName;
+                       }
+                       else {
+                           return attendee.email;
+                       }
+                        
+                    }
+                    else {
+                        return false;
+                    }
+                }).filter( (element) => { 
+                    return element;  
+                });
+            }
+            else {
+                return [];
+            }
         }
     }
   }
 });
 
 function getCreator(event) {
-    if( event.creator.displayName) {
-        return event.creator.displayName;
+    if( event.creator ) {
+        if( event.creator.displayName) {
+            return event.creator.displayName;
+        }
+        return event.creator.email.replace(/\@clockwork\.(com|net)/, '');
     }
-    return event.creator.email.replace(/\@clockwork\.(com|net)/, '');
+    else {
+        return 'Creator Not Known';
+    }
+   
 }

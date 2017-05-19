@@ -4,7 +4,6 @@ var readline = require('readline');
 var google = require('googleapis');
 var googleAuth = require('google-auth-library');
 var env = require('node-env-file');
-var db = require('../database')
 env('.env');
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/calendar-nodejs-quickstart.json
@@ -100,32 +99,5 @@ function storeToken(token) {
  */
 function listEvents(auth) {
     var calendar = google.calendar('v3');
-    db.each('SELECT name, gid FROM rooms', function (err, row) {
-      calendar.events.list({
-        auth: auth,
-        calendarId: row.gid,
-        timeMin: (new Date()).toISOString(),
-        maxResults: 10,
-        singleEvents: true,
-        orderBy: 'startTime'
-      }, function(err, response) {
-        if (err) {
-          console.log('The API returned an error: ' + err);
-          return;
-        }
-        var events = response.items;
-        if (events.length == 0) {
-          console.log('No upcoming events found.');
-        } else {
-          console.log('Upcoming 10 events:');
-          for (var i = 0; i < events.length; i++) {
-            var event = events[i];
-            console.log(event);
-            var start = event.start.dateTime || event.start.date;
-            var end   = event.end.dateTime || event.end.date;
-            console.log('%s - %s', start, end, event.summary);
-          }
-        }
-      });
-    })
+    
 }

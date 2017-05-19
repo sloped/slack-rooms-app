@@ -1,10 +1,6 @@
 var google = require('googleapis');
 var googleAuth = require('google-auth-library');
 var client = null;
-// If modifying these scopes, delete your previously saved credentials
-// at ~/.credentials/calendar-nodejs-quickstart.json
-var SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
-
 
 module.exports = getCalendar;
 /**
@@ -21,10 +17,10 @@ function authorize(credentials) {
   var auth = new googleAuth();
   var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
   oauth2Client.credentials = {
-    "access_token":process.env.GOOGLE_OAUTH_ACCESS_TOKEN,
-    "refresh_token":process.env.GOOGLE_OAUTH_REFRESH_TOKEN,
-    "token_type":"Bearer",
-    "expiry_date":process.env.GOOGLE_OAUTH_EXPIRY};
+    "access_token":credentials.access_token,
+    "refresh_token":credentials.refresh_token,
+    "token_type":"Bearer"
+  }
   client = oauth2Client;
 }
 
@@ -34,7 +30,10 @@ function authorize(credentials) {
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 function getCalendar(cal_id, maxTime = new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString()) {
-    authorize();
+    authorize( { 
+      access_token : this.get('google_access_token'),
+      refresh_token: this.get('google_refresh_token') }
+    );
     return new Promise( (resolve, reject) => {
       var calendar = google.calendar('v3');
         calendar.events.list({
@@ -49,6 +48,7 @@ function getCalendar(cal_id, maxTime = new Date(new Date().getTime() + 24 * 60 *
 
           if (err) {
             console.error('We Encountered an error. ', err);
+
             resolve(null);
             return;
           }

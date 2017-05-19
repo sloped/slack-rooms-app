@@ -14,13 +14,13 @@ const events = {
       resolve(root, params, options, ast) {
         return new Promise( (resolve, reject) => {
             new Room( {'name' : params.name}).fetch().then( ( model ) => {
-                getCalendar(model.get('gid')).then( (data) => {
+                options.user.getCalendar(model.get('gid')).then( (data) => {
                     if( data === null ) {
                         resolve([]);
                     }
                     resolve(data.map((event) => {
                         return {
-                            name: event.summary,
+                            name: event.summary || "Unknown Event",
                             description: event.description,
                             startTime: event.start.dateTime,
                             creator: event.creator,

@@ -5,6 +5,9 @@ const apolloClient = new ApolloClient({
   networkInterface: createNetworkInterface({
     uri: '/graphql',
     transportBatching: true,
+    opts: {
+      credentials: 'same-origin',
+    },
   }),
   connectToDevTools: true,
 });

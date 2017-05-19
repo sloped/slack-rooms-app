@@ -50,7 +50,6 @@ var interval;
                 var slice = 1;
                 return this.events.filter( (event) => {
                     if( this.now.isBetween(moment(event.startTime), moment(event.endTime)) ) {
-                        slice ++;
                         return false;
                     }
                     return true;
@@ -97,8 +96,3 @@ var interval;
     };
 
 </script>
-
-<style lang="scss" >
-
-
-</style>
