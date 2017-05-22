@@ -1,7 +1,9 @@
 import passport from 'passport';
 module.exports = function(app) {
     app.get('/auth/google',
-        passport.authenticate('google', { hd: 'clockwork.com', scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/calendar.readonly'] })
+        passport.authenticate('google', { hd: 'clockwork.com', 
+                                        scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/calendar.readonly'],
+                                        accessType: 'offline'  })
     );
     app.get('/auth/google/callback', 
         passport.authenticate('google', { failureRedirect: '/login' }),
