@@ -23,15 +23,19 @@ const slack_handler = function(req, res) {
     function check_token() {
         return response_token = process.env.SLACK_VERIFICATION_TOKEN;
     }
-
+    
     function check_action(body) {
-        if( body.command === '/rooms') {
+        
+        if( body.command === process.env.SLACK_ROOMS_COMMAND) {
             res.send();
             slash_rooms(body, respond);
         }
         else if( body.callback_id === 'room_check') {
-             res.send();
-            room_command(body, respond);
+            let room = body.actions.find((action) => {
+                return action.name === 'room_list'
+            }).selected_options[0].value;
+            res.send();
+            room_command(room, respond);
         }
         else {
             console.error('unknown command');

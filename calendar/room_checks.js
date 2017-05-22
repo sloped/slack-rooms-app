@@ -52,6 +52,10 @@ const available_rooms = function() {
 const room_status = function(room) {
     return new Promise( (resolve, reject) => {
         new Room( {'name' : room}).fetch().then( ( model ) => {
+            if(model === null ) {
+                reject(null);
+                return;
+            }
             getCalendar(model.get('gid')).then( (data) => {
                 resolve(data)
             });

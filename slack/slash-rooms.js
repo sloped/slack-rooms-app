@@ -1,8 +1,11 @@
 import request from 'request';
 import moment from 'moment';
 import {available_rooms, list_rooms} from '../calendar/room_checks.js';
+import room_command from './room-command.js';
 
 const slash_rooms = function(body, respond) {
+    var regex = /check\s(\w+)/;
+    var match = regex.exec(body.text);
     if( body.text === 'help' ) {
         respond({
             "text" : `
@@ -41,6 +44,14 @@ const slash_rooms = function(body, respond) {
             });
         })
     } 
+    else if(  typeof match[1]  === 'string' ) {
+        
+        room_command(match[1].split('').reduce( (agg, item, index) => { 
+        if(index === 0) {
+            return agg + item.toUpperCase(); 
+        } 
+            return agg+item } , ''), respond);
+    }
     else if ( body.text === 'available') {
         available_rooms().then( (rooms) => {
             if( rooms.length ) {
