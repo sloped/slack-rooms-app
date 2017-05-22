@@ -1,2 +1,3 @@
 import auth from './auth.js';
-module.exports = {auth};
+import track from './track.js';
+module.exports = {auth, track};
