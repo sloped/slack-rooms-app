@@ -44,7 +44,7 @@ const slash_rooms = function(body, respond) {
             });
         })
     } 
-    else if(  typeof match  === 'array' ) {
+    else if(  typeof match  === 'object' ) {
         
         room_command(match[1].split('').reduce( (agg, item, index) => { 
         if(index === 0) {

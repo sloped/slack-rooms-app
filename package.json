@@ -10,9 +10,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node main.js",
     "dev": "nodemon main.js --config config/nodemon.json",
-    "build": "webpack --config config/webpack.config.js",
+    "build": "webpack --config config/webpack.production.config.js",
     "auth-google": "node calendar/authenticate_google.js",
-    "heroku-postbuild": "webpack --config config/webpack.config.js && npm run migrate && npm run seed",
+    "heroku-postbuild": "webpack --config config/webpack.production.config.js && npm run migrate && npm run seed",
     "knex": "knex --knexfile database/knexfile.js --cwd database",
     "knex-prod": "knex --knexfile database/knexfile.js --cwd database --env production migrate:latest",
     "migrate": "npm run knex migrate:latest",
@@ -64,7 +64,8 @@
     "vue-template-compiler": "^2.3.3",
     "webpack": "^2.5.1",
     "webpack-dev-middleware": "^1.10.2",
-    "webpack-hot-middleware": "^2.18.0"
+    "webpack-hot-middleware": "^2.18.0",
+    "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
