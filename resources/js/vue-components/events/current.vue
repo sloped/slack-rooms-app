@@ -16,7 +16,7 @@
     </div>
     <div v-else>
         <h1 class="status available">Available</h1>
-    </div>        
+    </div>
 </div>
 </template>
 
@@ -28,7 +28,7 @@ import moment from 'moment';
         props: ['event'],
         filters: {
             from(date) {
-                return moment(date).fromNow(true)
+                return moment(date).fromNow(true);
             }
         }
     };

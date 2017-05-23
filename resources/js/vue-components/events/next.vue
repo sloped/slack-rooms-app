@@ -16,19 +16,17 @@
 
 <script>
 import moment from 'moment';
-
-var interval;
     export default {
         props: ['event'],
         filters: {
             date(date) {
-                return moment(date).format('dddd [at] h:mm a')
+                return moment(date).format('dddd [at] h:mm a');
             },
             from(date) {
-                return moment(date).fromNow(true)
+                return moment(date).fromNow(true);
             }
         },
-        
+
     };
 
 </script>

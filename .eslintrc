@@ -1,0 +1,22 @@
+{
+  "env": {
+        	"browser": true
+    	},
+		"globals": {
+			"Vue" : false,
+			"require" : false,
+      "axios" : false
+		},
+	  "extends": ["standard", "clockwork"],
+    "parser": "babel-eslint",
+		"parserOptions": {
+        	"sourceType": "module"
+    	},
+    "plugins": ["html", "vue"],
+    "rules": {
+      "vue/jsx-uses-vars": 2
+    }
+}
+
+
+

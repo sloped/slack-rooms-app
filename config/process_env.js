@@ -5,9 +5,9 @@ module.exports = function() {
         env('.env');
       }
       catch (ex) {
-        console.error('You must create a .env file. ')
-        console.info('Bailing!')
+        console.error('You must create a .env file. ');
+        console.info('Bailing!');
         process.exit(0);
       }
     }
-}
+};

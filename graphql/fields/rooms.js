@@ -1,4 +1,4 @@
-import {GraphQLList } from 'graphql';
+import {GraphQLList} from 'graphql';
 import {Rooms} from '../../database';
 import Room from '../types/room.js';
 
@@ -12,10 +12,10 @@ const rooms =  {
                 return {
                   name: attributes.name,
                   calendar: attributes.gid
-                }
+                };
               }));
-            })
-        })
+            });
+        });
       }
-    }
+    };
 module.exports = rooms;

@@ -11,13 +11,11 @@
 
 <script>
 import moment from 'moment';
-
-var interval;
     export default {
         props: ['events'],
         filters: {
             date(date) {
-                return moment(date).format('dddd [at] h:mm a')
+                return moment(date).format('dddd [at] h:mm a');
             }
         }
     };

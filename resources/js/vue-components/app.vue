@@ -1,6 +1,6 @@
 <template>
 <div class="app">
-    
+
     <nav class="nav">
         <div class="nav-left">
             <span v-if="user" v-for="room in rooms" class="nav-item"><router-link :to="{name: 'events', params: {name: room.name}}">{{room.name}}</router-link></span>
@@ -15,7 +15,7 @@
     <footer class="footer" >
         <div class="container">
             <div class="content has-text-centered">
-               <strong>Current Time: {{now}}</strong> | 
+               <strong>Current Time: {{now}}</strong> |
                 <span>This site runs like <a href="http://clockwork.com">Clockwork</a>.</span>
             </div>
         </div>
@@ -53,11 +53,11 @@ var interval = null;
         },
         methods: {
             updateNow() {
-                this.currentMoment = moment(); 
+                this.currentMoment = moment();
             }
         },
         created() {
-            interval = later.setInterval(this.updateNow, every_minute )
+            interval = later.setInterval(this.updateNow, every_minute );
         },
         destroyed() {
             interval.clear();
@@ -69,7 +69,7 @@ var interval = null;
                  pollInterval: 1000 * 60 * 15
             }
         }
-        
+
     };
 
 </script>

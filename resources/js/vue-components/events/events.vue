@@ -5,7 +5,7 @@
         <next-event :event="nextEvent"></next-event>
         <upcoming-events :events="comingUp"></upcoming-events>
     </div>
-    <div v-else> 
+    <div v-else>
         <h1 class="status available">Available</h1>
         <div class="box">
             <h2>No Events Scheduled for Today or Tomorrow</h2>
@@ -33,10 +33,10 @@ var interval;
         },
         filters: {
             date(date) {
-                return moment(date).format('dddd [at] h:mm:a')
+                return moment(date).format('dddd [at] h:mm:a');
             },
             from(date) {
-                return moment(date).fromNow(true)
+                return moment(date).fromNow(true);
             }
         },
         data() {
@@ -76,7 +76,7 @@ var interval;
             }
         },
         created() {
-            interval = later.setInterval(this.updateNow, every_minute )
+            interval = later.setInterval(this.updateNow, every_minute );
         },
         destroyed() {
             interval.clear();
@@ -85,14 +85,14 @@ var interval;
             events: {
                 query: events,
                 variables() {
-                    return  { 
+                    return  {
                         roomName: this.name
-                    }
+                    };
                 },
                 pollInterval: 1000 * 60 * 5
             }
         }
-        
+
     };
 
 </script>

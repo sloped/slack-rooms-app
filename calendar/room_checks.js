@@ -11,9 +11,9 @@ const list_rooms = function() {
             }
           }));
         });
-    }); 
-   
-}
+    });
+
+};
 const available_rooms = function() {
     let promises = [];
     return new Promise( (resolve, reject ) =>  {
@@ -29,7 +29,7 @@ const available_rooms = function() {
                 });
                 promises.push(promise);
             });
-                
+
             Promise.all(promises).then( (data)=> {
                 var response = data.filter( (room) => {
                     if( room.events === null ) {
@@ -37,17 +37,17 @@ const available_rooms = function() {
                     }
                     var current = room.events.findIndex( (event) => {
                         return moment().isBetween(moment(event.start.dateTime,  'YYYY-MM-DDTHH:mm:ssZZ'), moment(event.end.dateTime,  'YYYY-MM-DDTHH:mm:ssZZ'))
-                    }) === -1; 
+                    }) === -1;
                     return current;
                 }).map( (room) => {
                     return room.name;
                 })
-                
+
                 resolve(response);
             });
-        })
-    }); 
-}
+        });
+    });
+};
 
 const room_status = function(room) {
     return new Promise( (resolve, reject) => {
@@ -61,10 +61,7 @@ const room_status = function(room) {
             });
         });
     });
-    
-}
-function current_event(event) {
-    return moment().isBetween(moment(event.start.dateTime,  'YYYY-MM-DDTHH:mm:ssZZ'), moment(event.end.dateTime,  'YYYY-MM-DDTHH:mm:ssZZ'))
-}
+
+};
 
 module.exports = {available_rooms, room_status, list_rooms};

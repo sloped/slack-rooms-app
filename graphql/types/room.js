@@ -6,7 +6,6 @@ import {
   GraphQLList
 } from 'graphql';
 import Event from './event.js';
-import getCalendar from '../../calendar/get_calendar.js';
 
 export default new GraphQLObjectType({
   name: 'Room',
@@ -34,15 +33,15 @@ export default new GraphQLObjectType({
                               creator: event.creator,
                               endTime: event.end.dateTime,
                               attendees: event.attendees
-                          }
-                      }))
+                          };
+                      }));
                   });
               });
             }
             else {
               return null;
             }
-            
+
         }
     }
   }

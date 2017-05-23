@@ -1,6 +1,5 @@
 import { GraphQLString, GraphQLList, GraphQLNonNull } from 'graphql';
 import Event from '../types/event.js';
-import getCalendar from '../../calendar/get_calendar.js';
 import {Room} from '../../database';
 
 const events = {
@@ -30,11 +29,11 @@ const events = {
                             creator: event.creator,
                             endTime: event.end.dateTime,
                             attendees: event.attendees
-                        }
-                    }))
+                        };
+                    }));
                 });
-            })
-        })
+            });
+        });
       }
     };
 

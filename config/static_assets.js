@@ -13,4 +13,4 @@ module.exports = function(app) {
     else {
       app.use(express.static('public'));
     }
-}
+};

@@ -1,4 +1,3 @@
-import {available_rooms, room_status, list_rooms} from '../calendar/room_checks.js';
 import moment from 'moment';
 
 module.exports = function(data, room_name) {
@@ -9,8 +8,8 @@ module.exports = function(data, room_name) {
     let attachments = [];
     let response = '';
     if( typeof current === 'object' ) {
-        text = `:redflag: *Occupied* 
-*${room_name}* is Occupied`
+        text = `:redflag: *Occupied*
+*${room_name}* is Occupied`;
         attachments.push( {
             "title" : "Current Meeting",
             "title_link" : current.htmlLink,
@@ -29,11 +28,11 @@ module.exports = function(data, room_name) {
                     "value" : convert_date(current.end.dateTime).from()
                 }
             ]
-        })
+        });
     }
     else {
-        text = `:check: *Available* 
-*${room_name}* is Available`
+        text = `:check: *Available*
+*${room_name}* is Available`;
     }
     if( typeof next === 'object' ) {
        attachments.push( {
@@ -54,7 +53,7 @@ module.exports = function(data, room_name) {
                     "value" : convert_date(next.start.dateTime).from()
                 }
             ]
-        })
+        });
     }
     response = {text: text};
 
@@ -77,4 +76,4 @@ module.exports = function(data, room_name) {
             return now.isBefore(convert_date(event.start.dateTime));
         });
     }
-}
+};

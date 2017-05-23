@@ -1,7 +1,5 @@
-import {GraphQLNonNull, GraphQLString } from 'graphql';
-import {User} from '../../database';
 import UserType from '../types/user.js';
-const user = {   
+const user = {
     type: UserType,
     resolve(root, params, options, ast) {
 
@@ -10,13 +8,13 @@ const user = {
             resolve( {
                 name : options.user.get('name'),
                 googleId: options.user.get('googleId')
-            } )
+            } );
         }
         else {
             resolve( null );
         }
-    })
+    });
     }
-}
+};
 
 module.exports = user;

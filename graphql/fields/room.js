@@ -1,7 +1,7 @@
-import {GraphQLNonNull, GraphQLString } from 'graphql';
+import {GraphQLNonNull, GraphQLString} from 'graphql';
 import {Room} from '../../database';
 import RoomType from '../types/room.js';
-const room = {   
+const room = {
     type: RoomType,
     args: {
         name: {
@@ -16,10 +16,10 @@ const room = {
                   name: model.get('name'),
                   calendar: model.get('gid')
                 });
-        })
-        
-    })
+        });
+
+    });
     }
-}
+};
 
 module.exports = room;
