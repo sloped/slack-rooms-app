@@ -1,4 +1,3 @@
-import request from 'request';
 import moment from 'moment';
 import {available_rooms, list_rooms} from '../calendar/room_checks.js';
 import room_command from './room-command.js';
@@ -10,22 +9,19 @@ const slash_rooms = function(body, respond) {
         respond({
             "text" : `
 *The following commands are available:*
-\`[check]\` - This will present a prompt for all known rooms. You may select one and it will return any currently occuring meetings and the next meeting scheduled. 
-\`[available]\` - This will check all rooms and return a list of those that are available at this time.  
+\`[check]\` - This will present a prompt for all known rooms. You may select one and it will return any currently occuring meetings and the next meeting scheduled.
+\`[available]\` - This will check all rooms and return a list of those that are available at this time.
 `,
-        })
-    } 
+        });
+    }
     else if( body.text === 'check' ) {
         list_rooms().then( (rooms)=> {
-            let response = rooms.reduce( (string, current) => {
-                return string + ' ' + current.name;
-            }, '')
             let actions = rooms.map( (current) => {
                 return {
                     "text": current.name,
                     "value": current.name
-                }
-            })
+                };
+            });
             respond({
                 "text" : "Which room do you wish to check?",
                 "attachments" : [
@@ -42,15 +38,15 @@ const slash_rooms = function(body, respond) {
                    }
                 ]
             });
-        })
-    } 
+        });
+    }
     else if(  typeof match  === 'object' && match !== null ) {
-        
-        room_command(match[1].split('').reduce( (agg, item, index) => { 
+
+        room_command(match[1].split('').reduce( (agg, item, index) => {
         if(index === 0) {
-            return agg + item.toUpperCase(); 
-        } 
-            return agg+item } , ''), respond);
+            return agg + item.toUpperCase();
+        }
+            return agg+item; } , ''), respond);
     }
     else if ( body.text === 'available') {
         available_rooms().then( (rooms) => {
@@ -60,10 +56,10 @@ const slash_rooms = function(body, respond) {
                             return acc + `*${room}*`;
                         }
                         else if ( index === 0 && arr.length > 1 ) {
-                            return acc + `*${room}*`
+                            return acc + `*${room}*`;
                         }
                         else if( arr.length === 1 ) {
-                            return acc + ` and *${room}*`
+                            return acc + ` and *${room}*`;
                         }
                         else if( index + 1 === arr.length ) {
                             return acc + ', and *' + room + '*';
@@ -82,26 +78,26 @@ const slash_rooms = function(body, respond) {
                             title_link: create_calendar_link()
                         }
                     ]
-                })
+                });
             }
             else {
                 respond( {
                     text: `:redflag: There are no room available`
-                })
-            } 
-        })
+                });
+            }
+        });
     }
     else {
         respond({
             "text" : `You can get [help], check a room's status [check], or find an available room [available]`
-        })
+        });
     }
-}
+};
 
 function create_calendar_link() {
-    var now = moment().utc().format('YYYYMMDD[T]HHmmss[Z]')
-    var end = moment().add(30, 'm').utc().format('YYYYMMDD[T]HHmmss[Z]')
-    return `http://www.google.com/calendar/event?action=TEMPLATE&dates=${now}%2F${end}&text=New%20Event&location=&details=` 
+    var now = moment().utc().format('YYYYMMDD[T]HHmmss[Z]');
+    var end = moment().add(30, 'm').utc().format('YYYYMMDD[T]HHmmss[Z]');
+    return `http://www.google.com/calendar/event?action=TEMPLATE&dates=${now}%2F${end}&text=New%20Event&location=&details=`;
 }
 
 module.exports = slash_rooms;

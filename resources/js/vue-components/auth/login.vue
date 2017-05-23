@@ -7,11 +7,8 @@
 </template>
 
 <script>
-import moment from 'moment';
-
-var interval;
     export default {
-        
+
     };
 
 </script>

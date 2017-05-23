@@ -29,7 +29,7 @@ var interval;
                 rooms: [],
                 now : moment(),
                 interval: ''
-            }
+            };
         },
         computed : {
             available() {
@@ -40,7 +40,7 @@ var interval;
                         return false;
                     }
                     return true;
-                })
+                });
             },
             occupied() {
                 return this.rooms.filter( (room) => {
@@ -50,7 +50,7 @@ var interval;
                         return true;
                     }
                     return false;
-                })
+                });
             }
         },
         methods: {

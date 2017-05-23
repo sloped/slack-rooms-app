@@ -1,13 +1,13 @@
-var passport = require('passport');
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 import express_session from 'express-session';
 import bookshelfStore from 'connect-bookshelf';
 import {User, Session} from '../database';
+var passport = require('passport');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 module.exports = function(app) {
 
     const session_store = bookshelfStore(express_session);
 
-    app.use(express_session({ 
+    app.use(express_session({
         secret: process.env.APP_SECRET,
         resave: true,
         saveUninitialized: true,
@@ -16,7 +16,7 @@ module.exports = function(app) {
 
     app.use(passport.initialize());
     app.use(passport.session());
-    
+
     passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -31,7 +31,7 @@ module.exports = function(app) {
                     }, {patch: true}).then((user) => {
 
                         return done(null, user);
-                    })
+                    });
                 });
         }
     ));
@@ -45,4 +45,4 @@ module.exports = function(app) {
             done(null, user);
         });
     });
-}
+};

@@ -1,4 +1,4 @@
-import { ApolloClient, createNetworkInterface } from 'apollo-client'
+import { ApolloClient, createNetworkInterface } from 'apollo-client';
 import VueApollo from 'vue-apollo';
 import Vue from 'vue';
 const apolloClient = new ApolloClient({
@@ -12,7 +12,7 @@ const apolloClient = new ApolloClient({
   connectToDevTools: true,
 });
 // Install the vue plugin
-Vue.use(VueApollo)
+Vue.use(VueApollo);
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient,
 });

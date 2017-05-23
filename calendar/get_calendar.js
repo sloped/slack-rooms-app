@@ -1,10 +1,6 @@
 var google = require('googleapis');
 var googleAuth = require('google-auth-library');
 var client = null;
-// If modifying these scopes, delete your previously saved credentials
-// at ~/.credentials/calendar-nodejs-quickstart.json
-var SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
-
 
 module.exports = getCalendar;
 /**

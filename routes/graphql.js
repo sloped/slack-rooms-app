@@ -8,4 +8,4 @@ module.exports = function(app) {
       stack: error.stack,
       path: error.path
     })}));
-}
+};

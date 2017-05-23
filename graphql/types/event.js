@@ -44,13 +44,13 @@ export default new GraphQLObjectType({
                        else {
                            return attendee.email;
                        }
-                        
+
                     }
                     else {
                         return false;
                     }
-                }).filter( (element) => { 
-                    return element;  
+                }).filter( (element) => {
+                    return element;
                 });
             }
             else {
@@ -71,5 +71,4 @@ function getCreator(event) {
     else {
         return 'Creator Not Known';
     }
-   
 }

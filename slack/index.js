@@ -3,7 +3,7 @@ import slash_rooms from './slash-rooms.js';
 import room_command from './room-command.js';
 import tracking from '../config/analytics.js';
 const slack_handler = function(req, res) {
-    
+
     let body = req.body;
 
     if( req.body.payload ) {
@@ -11,21 +11,20 @@ const slack_handler = function(req, res) {
     }
 
     let response_url = body.response_url;
-    let response_token = body.token;
 
-    if( check_token(body) ) {
+    if( check_token(body.token) ) {
         check_action(body);
-    } 
+    }
     else {
         console.error('invalid');
     }
 
-    function check_token() {
-        return response_token = process.env.SLACK_VERIFICATION_TOKEN;
+    function check_token(token) {
+        return token === process.env.SLACK_VERIFICATION_TOKEN;
     }
-    
+
     function check_action(body) {
-        
+
         if( body.command === process.env.SLACK_ROOMS_COMMAND) {
             res.send();
             tracking.track_event('Slack', 'slash_command', process.env.SLACK_ROOMS_COMMAND);
@@ -61,4 +60,4 @@ const slack_handler = function(req, res) {
 
 
 
-module.exports = slack_handler; 
+module.exports = slack_handler;
