@@ -1,16 +1,22 @@
 
 exports.up = function(knex, Promise) {
-  return knex.schema.table('users', function (t) {
-     t.string('googleId').changeTo('text');
-     t.string('google_access_token').changeTo('text');
-     t.string('google_refresh_token').changeTo('text');
+  if(knex.client.config.client === 'sqlite3') {
+    return Promise.resolve();
+  }
+  return knex.schema.alterTable('users', function (t) {
+     t.text('googleId').alter();
+     t.text('google_access_token').alter();
+     t.text('google_refresh_token').alter();
   });
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.table('users', function (t) {
-     t.string('googleId').changeTo('string');
-     t.string('google_access_token').changeTo('string');
-     t.string('google_refresh_token').changeTo('string');
+  if(knex.client.config.client === 'sqlite3') {
+    return Promise.resolve();
+  }
+  return knex.schema.alterTable('users', function (t) {
+     t.string('googleId').alter();
+     t.string('google_access_token').alter();
+     t.string('google_refresh_token').alter();
   });
 };
