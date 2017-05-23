@@ -3,7 +3,7 @@
 
     <nav class="nav">
         <div class="nav-left">
-            <span v-if="user" v-for="room in rooms" class="nav-item"><router-link :to="{name: 'events', params: {name: room.name}}">{{room.name}}</router-link></span>
+          <router-link v-if="user" v-for="room in rooms" :key="room.name" class="is-tab nav-item" :class="{'is-active': current_route === room.name}" :to="{name: 'events', params: {name: room.name}}">{{room.name}}</router-link>
         </div>
         <div class="nav-right">
             <logout-button :user="user"></logout-button>
@@ -49,6 +49,11 @@ var interval = null;
         computed : {
             now() {
                 return this.currentMoment.format("h:mm a");
+            },
+            current_route() {
+              if( this.$route.name === 'events') {
+                return this.$route.params.name;
+              }
             }
         },
         methods: {

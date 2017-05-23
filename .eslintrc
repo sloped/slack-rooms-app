@@ -1,6 +1,7 @@
 {
   "env": {
-        	"browser": true
+        	"browser": true,
+          "node": true
     	},
 		"globals": {
 			"Vue" : false,
@@ -10,11 +11,13 @@
 	  "extends": ["standard", "clockwork"],
     "parser": "babel-eslint",
 		"parserOptions": {
-        	"sourceType": "module"
+        	"sourceType": "module",
+          "ecmaVersion": 6
     	},
     "plugins": ["html", "vue"],
     "rules": {
-      "vue/jsx-uses-vars": 2
+      "vue/jsx-uses-vars": 2,
+      "no-console": 0
     }
 }
 
