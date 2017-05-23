@@ -1,8 +1,16 @@
 {
   "name": "calendar-server",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Show calendar events for a room",
   "main": "main.js",
+  "private": true,
+  "repository": {
+    "type" : "git",
+     "url" : "https://connermccall@gitlab.com/clockworkers/calendar-server.git"
+  },
+  "bugs" : { "url" : "https://gitlab.com/clockworkers/calendar-server/issues", 
+             "email" : "conner@clockwork.com"
+            },
   "engines": {
     "node": "6.10.3"
   },
