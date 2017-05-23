@@ -24,12 +24,13 @@ You'll need to create a new Oauth application for Google. https://console.develo
 
 Run `npm run auth-google`. Follow the steps. Copy the keys from `/storage/calendar-nodejs-quickstart.json` to the corresponding values in the `.env`. 
 
-###Database
+### Database
 Run `npm run migrate` to create the necessary tables. Then `npm run seed` to insert the calendar data into the database. 
 
-###Run
+### Run
 
 Run with `npm run dev`
 
-###Running on Heroku
+### Running on Heroku
+
 More info to come. 
