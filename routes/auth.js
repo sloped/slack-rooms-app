@@ -3,7 +3,8 @@ module.exports = function(app) {
     app.get('/auth/google',
         passport.authenticate('google', { hd: 'clockwork.com',
                                         scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/calendar.readonly'],
-                                        accessType: 'offline'  })
+                                        accessType: 'offline',
+                                        prompt: 'consent'  })
     );
     app.get('/auth/google/callback',
         passport.authenticate('google', { failureRedirect: '/login' }),
