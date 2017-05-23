@@ -6,7 +6,8 @@ module.exports = function(app) {
     if( process.env.NODE_ENV !== 'production' ) {
       app.use(webpackMiddleware(webpack(webpack_config), {
         publicPath: webpack_config.output.publicPath,
-        noInfo: process.env.SHOW_WEBPACK_INFO || false
+        noInfo: process.env.HIDE_WEBPACK_INFO === 'true' || false,
+        stats: 'minimal'
       }));
     }
     else {

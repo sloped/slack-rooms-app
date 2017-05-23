@@ -74,8 +74,8 @@ var interval = null;
 
 </script>
 
-<style lang="sass" scoped>
-
+<style lang="sass">
+    @import "../../sass/main.scss"
 
 
 </style>

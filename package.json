@@ -4,7 +4,7 @@
   "description": "Show calendar events for a room",
   "main": "main.js",
   "engines": {
-    "node": "6.1.0"
+    "node": "6.10.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -37,6 +37,7 @@
     "express": "^4.15.2",
     "express-graphql": "^0.6.4",
     "express-session": "^1.15.3",
+    "extract-text-webpack-plugin": "^2.1.0",
     "google-auth-library": "^0.10.0",
     "googleapis": "^19.0.0",
     "gql": "^1.1.2",
