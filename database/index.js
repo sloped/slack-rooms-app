@@ -15,7 +15,7 @@ if( process.env.NODE_ENV === 'production') {
 const knex = _knex(config);
 const bookshelf = _bookshelf(knex);
 bookshelf.plugin(ModelBase.pluggable);
-bookshelf.plugin(EncryptColumns, encryption_options);
+//bookshelf.plugin(EncryptColumns, encryption_options);
 
 const Room = bookshelf.Model.extend( rooms );
 const Rooms = bookshelf.Collection.extend( {
