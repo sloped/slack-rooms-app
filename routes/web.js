@@ -8,6 +8,10 @@ module.exports = function(app) {
         res.render('index', { title: 'Hey', message: 'Hello there!' });
     });
 
+    app.get('/about', auth, (req, res) => {
+        res.render('index', { title: 'Hey', message: 'Hello there!' });
+    });
+
     app.get('/login', (req, res) => {
       res.render('index', { title: 'Hey', message: 'Hello there!' })
     });
