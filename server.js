@@ -1,3 +1,4 @@
+var env = require('./config/process_env.js')();
 import app from './config/app.js';
 import routes from './routes';
 routes(app);

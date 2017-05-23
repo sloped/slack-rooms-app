@@ -4,7 +4,6 @@ import {User, Session} from '../database';
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 module.exports = function(app) {
-
     const session_store = bookshelfStore(express_session);
 
     app.use(express_session({
