@@ -7,7 +7,9 @@ const user = {
         if( options.isAuthenticated() ) {
             resolve( {
                 name : options.user.get('name'),
-                googleId: options.user.get('googleId')
+                googleId: options.user.get('googleId'),
+                id: options.user.get('id'),
+                is_admin: options.user.is_admin()
             } );
         }
         else {

@@ -4,6 +4,7 @@ import {
   GraphQLString,
   GraphQLInt,
   GraphQLID,
+  GraphQLBoolean,
 } from 'graphql';
 
 export default new GraphQLObjectType({
@@ -17,6 +18,9 @@ export default new GraphQLObjectType({
     },
     name: {
       type: GraphQLString
+    },
+    is_admin: {
+      type: GraphQLBoolean
     }
   }
 });

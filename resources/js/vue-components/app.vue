@@ -7,6 +7,7 @@
         </div>
         <div class="nav-right">
             <router-link v-if="user" :to="{name: 'about'}" :class="{'is-active': current_route === 'about'}" class="is-tab nav-item">About</router-link>
+            <router-link v-if="is_admin" :to="{name: 'admin'}" :class="{'is-active': current_route === 'admin'}" class="is-tab nav-item">Admin</router-link>
             <logout-button :user="user"></logout-button>
         </div>
     </nav>
@@ -58,6 +59,12 @@ var interval = null;
               else {
                 return this.$route.name;
               }
+            },
+            is_admin() {
+              if( this.user === null ) {
+                return false;
+              }
+              return this.user.is_admin;
             }
         },
         methods: {

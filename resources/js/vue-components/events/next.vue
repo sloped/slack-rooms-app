@@ -7,8 +7,8 @@
             <div class="eventOrganizer column is-one-third"><span>Organizer: {{event.creator}}</span></div>
         </div>
         <div>
-            <div class="eventStart"><strong>Starts:</strong> {{event.startTime | date}} ({{event.startTime | from }})</div>
-            <div class="eventEnd"><strong>Ends:</strong> {{event.endTime | date}}</div>
+            <div class="eventStart"><strong>Starts {{event.startTime | from }}</strong> ({{event.startTime | date}})</div>
+            <div class="eventEnd"><strong>{{length}} long</strong> ({{event.endTime | date}})</div>
         </div>
     </div>
 </div>
@@ -23,9 +23,20 @@ import moment from 'moment';
                 return moment(date).format('dddd [at] h:mm a');
             },
             from(date) {
-                return moment(date).fromNow(true);
+                return moment(date).fromNow();
             }
         },
+        computed : {
+          length() {
+            if( moment(this.event.endTime).diff(this.event.startTime) === 3600000 ) {
+              return moment(this.event.endTime).diff(this.event.startTime, 'h') + ' hour';
+            }
+            else if( moment(this.event.endTime).diff(this.event.startTime) > 3600000 ) {
+              return moment(this.event.endTime).diff(this.event.startTime, 'h') + ' hours';
+            }
+            return moment(this.event.endTime).diff(this.event.startTime, 'm') + ' minutes';
+          }
+        }
 
     };
 
