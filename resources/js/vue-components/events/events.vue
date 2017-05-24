@@ -1,9 +1,21 @@
 <template>
-<div class="column is-half is-offset-one-quarter component event-component">
+<div class="column is-10 is-offset-1 component event-component">
     <div v-if="have_events">
-        <current-event :event="currentEvent"></current-event>
-        <next-event :event="nextEvent"></next-event>
-        <upcoming-events :events="comingUp"></upcoming-events>
+      <div class="tile is-ancestor is-primary">
+        <div class="tile is-parent is-7">
+          <div class="tile is-child is-primary">
+            <current-event :event="currentEvent"></current-event>
+          </div>
+        </div>
+        <div class="tile is-parent is-vertical is-5">
+          <div class="tile is-child">
+            <next-event :event="nextEvent"></next-event>
+          </div>
+          <div class="tile is-child">
+            <upcoming-events :events="comingUp"></upcoming-events>
+          </div>
+        </div>
+      </div>
     </div>
     <div v-else>
         <h1 class="status available">Available</h1>
