@@ -21,7 +21,7 @@
     "dev": "nodemon main.js --config config/nodemon.json",
     "build": "webpack --config config/webpack.production.config.js",
     "auth-google": "node calendar/authenticate_google.js",
-    "heroku-postbuild": "webpack --config config/webpack.production.config.js && npm run migrate && npm run seed",
+    "heroku-postbuild": "webpack --config config/webpack.production.config.js && npm run migrate",
     "knex": "knex --knexfile database/knexfile.js --cwd database",
     "knex-prod": "knex --knexfile database/knexfile.js --cwd database --env production migrate:latest",
     "migrate": "npm run knex migrate:latest",

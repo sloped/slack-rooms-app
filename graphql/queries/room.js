@@ -9,13 +9,11 @@ const room = {
         type: new GraphQLNonNull(GraphQLString)
         }
     },
-    resolve(root, params, options, ast) {
+    resolve(root, params, req, ast) {
     return new Promise( (resolve, reject) => {
+        if( !req.isAuthenticated()) reject('Unauthorized');
         new Room( {'name' : params.name}).fetch().then( ( model ) => {
-            resolve( {
-                  name: model.get('name'),
-                  calendar: model.get('gid')
-                });
+            resolve( model.formatRoom() );
         });
 
     });
