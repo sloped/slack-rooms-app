@@ -3,27 +3,20 @@
   <div class="columns">
     <div class="column is-2">
       <aside class="menu">
-      <p class="menu-label">Edit Room</p>
+      <p class="menu-label">Edit</p>
       <ul class="menu-list">
-        <li v-for="room in rooms"><a href="#" v-on:click.prevent="set_room(room)">{{room.name}}</a></li>
+        <li v-for="item in rooms" :key="item.id"><a href="#" v-on:click.prevent="edit_room(item)" :class="{'is-active' : mode === 'edit' && room.id === item.id}">{{item.name}}</a></li>
       </ul>
+      <p class="menu-label">Create</p>
+      <ul class="menu-list">
+        <a class="is-primary" href="#" v-on:click.prevent="create_room" :class="{'is-active' : mode === 'create'}">Create Room</a>
+      </ul>
+
       </aside>
     </div>
-    <div class="column" v-if="room">
-      <h1>Edit {{room.name}}</h1>
-      <div class="field">
-        <label class="label">Name</label>
-        <p class="control">
-          <input class="input" type="text" v-model="room.name" />
-        </p>
-      </div>
-      <div class="field">
-        <label class="label">Calendar ID</label>
-        <p class="control">
-          <input class="input" type="text" v-model="room.calendar" />
-        </p>
-      </div>
-      <button class="button is-primary" v-on:click.prevent="update_room">Update</button>
+    <div class="column">
+      <edit-room v-if="mode === 'edit'" :room="room" v-on:update="clear_room"></edit-room>
+      <create-room v-if="mode === 'create'" :room="room" v-on:update="clear_room"></create-room>
     </div>
   </div>
 </div>
@@ -31,20 +24,40 @@
 
 <script>
 import {user, admin_rooms} from '@/graphql/graphql.js';
+import editRoom from '@components/admin/edit_room.vue';
+import createRoom from '@components/admin/create_room.vue';
     export default {
         data() {
             return {
                 user: null,
                 rooms: null,
-                room: null
+                room: null,
+                mode: null,
             };
         },
+        components: {
+          editRoom,
+          createRoom
+        },
         methods: {
-          set_room(room) {
+          edit_room(room) {
             this.room = {
+              id: room.id,
               name: room.name,
               calendar : room.calendar
             };
+            this.mode = 'edit';
+          },
+          create_room() {
+            this.room = {
+              name: null,
+              calenar: null
+            };
+            this.mode = 'create';
+          },
+          clear_room() {
+             this.room = null;
+             this.mode = null;
           }
         },
         apollo: {
