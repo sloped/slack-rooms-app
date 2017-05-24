@@ -1,5 +1,5 @@
 import graphqlHTTP from 'express-graphql';
-import {track} from './middleware';
+import {track, auth_api} from './middleware';
 import Schema from '../graphql/rootquery.js';
 module.exports = function(app) {
     app.use('/graphql', track,  graphqlHTTP({ schema: Schema , graphiql:true, formatError: error => ({

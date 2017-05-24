@@ -1,22 +1,10 @@
-import { GraphQLSchema, GraphQLObjectType } from 'graphql';
-import rooms from './fields/rooms';
-import room from './fields/room';
-import events from './fields/events';
-import user from './fields/user';
-
-const RootQuery = new GraphQLObjectType({
-  name: 'Calendar',
-  description: 'Retrieves rooms and their events.',
-  fields: {
-    rooms,
-    room,
-    events,
-    user
-  }
-});
+import { GraphQLSchema } from 'graphql';
+import query from './queries';
+import mutation from './mutations';
 
 const Schema = new GraphQLSchema({
-  query: RootQuery
+  query,
+  mutation
 });
 
 
