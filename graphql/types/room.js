@@ -29,6 +29,9 @@ export default new GraphQLObjectType({
             if( req.isAuthenticated() ) {
               return new Promise((resolve, reject) => {
                   req.user.getCalendar(room.calendar).then( (data) => {
+                      if(data === null ) {
+                        resolve([]);
+                      }
                       resolve(data.map((event) => {
                           return {
                               name: event.summary,

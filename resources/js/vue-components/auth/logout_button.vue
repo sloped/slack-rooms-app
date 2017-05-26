@@ -1,6 +1,6 @@
 <template>
 <span class="nav-item component logout-button-component" v-if="user">
-    Welcome {{user.name}}&nbsp;<a class="button is-small is-info" href="/logout"> Logout</a>
+    {{user.name}}&nbsp;<a class="button is-small is-info" href="/logout">Logout</a>
 </span>
 </template>
 
