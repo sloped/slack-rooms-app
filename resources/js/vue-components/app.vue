@@ -2,12 +2,10 @@
 <div class="app">
 
     <nav class="nav">
-        <div class="nav-left">
-          <router-link v-if="user" v-for="room in rooms" :key="room.name" class="is-tab nav-item" :class="{'is-active': current_route === room.name}" :to="{name: 'events', params: {name: room.name}}">{{room.name}}</router-link>
-        </div>
+        <room-nav v-if="user" v-bind:rooms="rooms"></room-nav>
         <div class="nav-right">
-            <router-link v-if="user" :to="{name: 'about'}" :class="{'is-active': current_route === 'about'}" class="is-tab nav-item">About</router-link>
-            <router-link v-if="is_admin" :to="{name: 'admin'}" :class="{'is-active': current_route === 'admin'}" class="is-tab nav-item">Admin</router-link>
+            <router-link v-if="user" :to="{name: 'about'}" :class="{'is-active': $route.name === 'about'}" class="is-tab nav-item">About</router-link>
+            <router-link v-if="is_admin" :to="{name: 'admin'}" :class="{'is-active': $route.name === 'admin'}" class="is-tab nav-item">Admin</router-link>
             <logout-button :user="user"></logout-button>
         </div>
     </nav>
@@ -29,17 +27,19 @@
 import apolloProvider from '../apollo/apolloProvider.js';
 import router from '../routes/index.js';
 import moment from 'moment';
-import {rooms} from '../graphql/graphql.js';
+import {room_events} from '../graphql/graphql.js';
 import later from 'later';
 import {every_minute} from '../resources/schedules';
 import logoutButton from '@components/auth/logout_button.vue';
+import roomNav from '@components/rooms/nav.vue';
 import {user} from '@/graphql/graphql.js';
 var interval = null;
     export default {
         apolloProvider,
         router,
         components : {
-            logoutButton
+            logoutButton,
+            roomNav
         },
         data() {
             return {
@@ -51,14 +51,6 @@ var interval = null;
         computed : {
             now() {
                 return this.currentMoment.format("h:mm a");
-            },
-            current_route() {
-              if( this.$route.name === 'events') {
-                return this.$route.params.name;
-              }
-              else {
-                return this.$route.name;
-              }
             },
             is_admin() {
               if( this.user === null ) {
@@ -79,7 +71,9 @@ var interval = null;
             interval.clear();
         },
         apollo: {
-            rooms,
+            rooms: {
+              query: room_events
+            },
             user : {
                  query: user,
                  pollInterval: 1000 * 60 * 15

@@ -1,7 +1,9 @@
 <template>
 <div class="component current-event-component">
     <div class="current" v-if="event">
+      <div class="notification">
         <h1 class="status occupied">Occupied</h1>
+      </div>
         <div class="box">
             <div class="currentEventEnd">Ends in {{event.endTime | from}}</div>
             <div class="columns">
@@ -15,7 +17,9 @@
         </div>
     </div>
     <div v-else>
+      <div class="notification is-success">
         <h1 class="status available">Available</h1>
+      </div>
     </div>
 </div>
 </template>
@@ -36,6 +40,9 @@ import moment from 'moment';
 </script>
 
 <style lang="scss" scoped>
+.notification {
+  margin-top:1rem;
+}
 .currentEventEnd {
     font-size:1rem;
     font-weight:700;

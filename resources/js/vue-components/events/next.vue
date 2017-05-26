@@ -1,7 +1,8 @@
 <template>
 <div class="component next-event-component" v-if="event">
-    <h1>Next Meeting</h1>
+
     <div class="box">
+      <h1>Next Meeting</h1>
         <div class="columns">
             <div class="eventName column is-two-thirds">{{event.name}}</div>
             <div class="eventOrganizer column is-one-third"><span>Organizer: {{event.creator}}</span></div>
