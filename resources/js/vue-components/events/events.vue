@@ -2,15 +2,16 @@
 <div class="column is-10 is-offset-1 component event-component">
     <div v-if="have_events">
       <div class="tile is-ancestor is-primary">
-        <div class="tile is-parent is-7">
+        <div class="tile is-parent is-7 is-vertical">
           <div class="tile is-child is-primary">
             <current-event :event="currentEvent"></current-event>
           </div>
-        </div>
-        <div class="tile is-parent is-vertical is-5">
           <div class="tile is-child">
             <next-event :event="nextEvent"></next-event>
           </div>
+        </div>
+        <div class="tile is-parent is-vertical is-5">
+
           <div class="tile is-child">
             <upcoming-events :events="comingUp"></upcoming-events>
           </div>
@@ -18,17 +19,25 @@
       </div>
     </div>
     <div v-else>
-        <h1 class="status available">Available</h1>
-        <div class="box">
-            <h2>No Events Scheduled for Today or Tomorrow</h2>
+      <div class="tile is-ancestor is-primary">
+        <div class="tile is-parent is-7 is-vertical">
+          <div class="tile is-child is-primary">
+            <div class="notification is-success">
+              <h1 class="status available">Available</h1>
+            </div>
+            <div class="box">
+                <h2>No Events Scheduled for the next 24 hours</h2>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
 </div>
 </template>
 
 <script>
 import moment from 'moment';
-import {events} from '@/graphql/graphql.js';
+import {room_events} from '@/graphql/graphql.js';
 import later from 'later';
 import {every_minute} from '@/resources/schedules';
 import CurrentEvent from '@components/events/current.vue';
@@ -53,8 +62,8 @@ var interval;
         },
         data() {
             return {
-                events : [],
-                now: moment()
+                now: moment(),
+                rooms: [],
             };
         },
         computed: {
@@ -79,6 +88,15 @@ var interval;
             },
             have_events() {
                 return this.events.length > 0;
+            },
+            events() {
+              var room = this.rooms.find( (room ) => {
+                return room.name === this.name;
+              });
+              if( room ) {
+                return room.events;
+              }
+              return [];
             }
 
         },
@@ -94,13 +112,8 @@ var interval;
             interval.clear();
         },
         apollo: {
-            events: {
-                query: events,
-                variables() {
-                    return  {
-                        roomName: this.name
-                    };
-                },
+            rooms: {
+                query: room_events,
                 pollInterval: 1000 * 60 * 5
             }
         }
@@ -108,3 +121,9 @@ var interval;
     };
 
 </script>
+
+<style lang="scss" scoped>
+  .notification {
+    margin-top:1rem;
+  }
+</style>
