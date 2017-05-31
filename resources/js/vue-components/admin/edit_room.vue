@@ -12,6 +12,18 @@
         <input class="input" type="text" v-model="room.calendar" />
       </p>
     </div>
+    <div class="field">
+      <label class="label">Room</label>
+      <p class="control">
+        <span class="select">
+          <select v-model="room.building">
+            <option disabled value="">Select a room</option>
+            <option value="rayvic">Rayvic</option>
+            <option value="annex">Annex</option>
+          </select>
+        </span>
+      </p>
+    </div>
     <button class="button is-primary" v-on:click.prevent="update_room">Update</button>
     <button class="button is-danger" v-on:click.prevent="delete_room">Delete</button>
 </div>
@@ -29,7 +41,8 @@ import {update_room, delete_room} from '@/graphql/graphql.js';
                 id: this.room.id,
                 room: {
                   name: this.room.name,
-                  calendar: this.room.calendar
+                  calendar: this.room.calendar,
+                  building: this.room.building
                 }
               }
             }).then( (data) => {

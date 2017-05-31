@@ -9,6 +9,7 @@ import {
 
 export default new GraphQLObjectType({
   name: 'User',
+  description: 'A user of the service.',
   fields: {
     _id: {
       type: new GraphQLNonNull(GraphQLID)
