@@ -9,6 +9,7 @@ import dateType from '../scalar-types/dateType.js';
 
 export default new GraphQLObjectType({
   name: 'Event',
+  description: "An event that is occuring within a room. This is retrieved from Google Calendar.",
   fields: {
     _id: {
       type: new GraphQLNonNull(GraphQLID)

@@ -44,14 +44,17 @@ import createRoom from '@components/admin/create_room.vue';
             this.room = {
               id: room.id,
               name: room.name,
-              calendar : room.calendar
+              calendar : room.calendar,
+              building: room.building
+
             };
             this.mode = 'edit';
           },
           create_room() {
             this.room = {
               name: null,
-              calenar: null
+              calendar: null,
+              building: null
             };
             this.mode = 'create';
           },

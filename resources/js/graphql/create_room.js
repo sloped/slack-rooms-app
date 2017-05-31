@@ -6,5 +6,6 @@ export default gql`
                     id
                     name
                     calendar
+                    building
                   }
                 }`;
