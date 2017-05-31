@@ -13,6 +13,10 @@ const room = {
     return new Promise( (resolve, reject) => {
         if( !req.isAuthenticated()) reject('Unauthorized');
         new Room( {'name' : params.name}).fetch().then( ( model ) => {
+          if( model === null ) {
+            resolve(null);
+            return;
+          }
             resolve( model.formatRoom() );
         });
 

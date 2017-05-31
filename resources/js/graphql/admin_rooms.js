@@ -5,6 +5,7 @@ export default gql`query RoomsForAdmin
                     rooms {
                         id,
                         name,
-                        calendar
+                        calendar,
+                        building
                     }
                 }`;
