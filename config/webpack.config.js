@@ -1,5 +1,6 @@
 /* global module */
 const path = require('path');
+const webpack = require('webpack');
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -50,4 +51,9 @@ module.exports = {
       }
     ]
   },
+  plugins:[
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    })
+  ]
 };
