@@ -9,7 +9,7 @@ const apolloClient = new ApolloClient({
       credentials: 'same-origin',
     },
   }),
-  connectToDevTools: true,
+  connectToDevTools: process.env.NODE_ENV === 'production' ? false : true,
 });
 // Install the vue plugin
 Vue.use(VueApollo);
